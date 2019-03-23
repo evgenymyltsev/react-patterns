@@ -5,12 +5,12 @@ import Counter from './components/Counter';
 export default class App extends React.Component {
     render() {
         return (
-            <Counter>
-                {props => (
-                    <div className="counter">
-                        <button onClick={props.decrement}>-</button>
-                        <span>{props.count}</span>
-                        <button onClick={props.increment}>+</button>
+            <Counter className='counter'>
+                {({ className, counterProps }) => (
+                    <div className={className}>
+                        <button onClick={counterProps.decrement}>-</button>
+                        <span>{counterProps.count}</span>
+                        <button onClick={counterProps.increment}>+</button>
                     </div>
                 )}
             </Counter>
