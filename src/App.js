@@ -3,16 +3,24 @@ import React from 'react';
 import Counter from './components/Counter';
 
 export default class App extends React.Component {
+    sendAnalytics = () => console.log('CLICKED')
     render() {
         return (
             <Counter className='counter'>
-                {({ className, counterProps }) => (
-                    <div className={className}>
-                        <button onClick={counterProps.decrement}>-</button>
-                        <span>{counterProps.count}</span>
-                        <button onClick={counterProps.increment}>+</button>
-                    </div>
-                )}
+                {({ className, getCounterProps }) => {
+                    const counterProps = getCounterProps({
+                        onClick: this.sendAnalytics,
+                        map: count => count * 2,
+                    })
+
+                    return (
+                        <div className={className}>
+                            <button onClick={counterProps.decrement}>-</button>
+                            <span>{counterProps.count}</span>
+                            <button onClick={counterProps.increment}>+</button>
+                        </div>
+                    )
+                }}
             </Counter>
         );
     }

@@ -14,11 +14,17 @@ class Counter extends React.Component {
     render() {
         return this.props.children({
             className: 'counter',
-            counterProps: {
-                count: this.state.count,
-                increment: this.increment,
-                decrement: this.decrement,
-            }
+            getCounterProps: ({ onClick, map }) =>( {
+                count: map(this.state.count),
+                increment: () => {
+                    this.increment();
+                    onClick();
+                },
+                decrement: () => {
+                    onClick();
+                    this.decrement();
+                },
+            }),
         });
     }
 }
